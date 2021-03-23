@@ -1,7 +1,5 @@
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.http import Http404
-from django.template import loader
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -41,4 +39,4 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 def owner(request):
-    return HttpResponse("Hello, world. df8a6aa9 is the polls owner.")
+    return HttpResponse("Hello, world,  is the 50ac4b2d polls owner.")
