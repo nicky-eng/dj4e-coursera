@@ -32,15 +32,16 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
-    'home.apps.HomeConfig',
-    'autos.apps.AutosConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home.apps.HomeConfig',
+    'polls.apps.PollsConfig',
+    'autos.apps.AutosConfig',
+    'cats.apps.CatsConfig',
 ]
 
 MIDDLEWARE = [
