@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'ads.apps.AdsConfig',
-    'ads.apps.AutosConfig',
-    'ads.apps.CatsConfig',
-    'ads.apps.PollsConfig',
+    'autos.apps.AutosConfig',
+    'cats.apps.CatsConfig',
+    'polls.apps.PollsConfig',
     ''
 
     # Extensions - installed with pip3 / requirements.txt
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 
 
 # When we get to crispy forms :)
-CRISPY_TEMPLATE_PACK = 'bootstrap'  # Add
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 # When we get to tagging
 TAGGIT_CASE_INSENSITIVE = True
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',   # Add
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -85,9 +85,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'home.context_processors.settings',      # Add
-                'social_django.context_processors.backends',  # Add
-                'social_django.context_processors.login_redirect', # Add
+                'home.context_processors.settings',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
