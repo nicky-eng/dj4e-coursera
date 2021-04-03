@@ -29,7 +29,7 @@ urlpatterns = [
     path('ads/', include('ads.urls')),
     path('autos/', include('autos.urls')),
     path('cats/', include('cats.urls')),
-    path('polls/', includel('polls.urls')),
+    path('polls/', include('polls.urls')),
     
 ]
 
