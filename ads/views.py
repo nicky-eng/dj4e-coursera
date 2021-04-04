@@ -4,7 +4,9 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.utils import IntegrityError
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
+from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
@@ -18,14 +20,30 @@ class AdListView(OwnerListView):
     template_name = "ads/ad_list.html"
 
     def get(self, request) :
-        ad_list = Ad.objects.all()
+        strval =  request.GET.get("search", False)
+        if strval :
+            # Simple title-only search
+            # objects = Post.objects.filter(title__contains=strval).select_related().order_by('-updated_at')[:10]
+
+            # Multi-field search
+            # __icontains for case-insensitive search
+            query = Q(title__icontains=strval) 
+            query.add(Q(text__icontains=strval), Q.OR)
+            ad_list = Ad.objects.filter(query).select_related().order_by('-updated_at')[:10]
+        else :
+            ad_list = Ad.objects.all().order_by('-updated_at')
+        
         favorites = list()
         if request.user.is_authenticated:
             # rows = [{'id': 2}, {'id': 4} ... ]  (A list of rows)
             rows = request.user.favorite_ads.values('id')
             # favorites = [2, 4, ...] using list comprehension
             favorites = [ row['id'] for row in rows ]
-        ctx = {'ad_list' : ad_list, 'favorites': favorites}
+        
+        for ad in ad_list:
+            ad.natural_updated = naturaltime(ad.updated_at)
+
+        ctx = {'ad_list' : ad_list, 'favorites': favorites, 'search': strval}
         return render(request, self.template_name, ctx)
 
 
